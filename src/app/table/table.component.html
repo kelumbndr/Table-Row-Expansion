@@ -1,0 +1,34 @@
+<table style="width: 100%; border : 1px black solid;" width="100%">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Document</th>
+      <th>Creation Date</th>
+      <th>Operator</th>
+      <th>Requester</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let data of datas; let i = index">
+      <tr (click)="onRowClick(data, i)">
+        <td>{{ visibleRrowIndex.includes(i) ? '&ndash;' : '+' }}</td>
+        <td align="center">{{ data.document }}</td>
+        <td align="center">{{ data.creationDate }}</td>
+        <td align="center">{{ data.operator }}</td>
+        <td align="center">{{ data.requester }}</td>
+      </tr>
+      <ng-container *ngIf="visibleRrowIndex.includes(i)">
+        <tr
+          [ngbCollapse]="!visibleRrowIndex.includes(i)"
+          *ngFor="let subData of subDatas.get(i)"
+        >
+          <td></td>
+          <td align="center">{{ subData.document }}</td>
+          <td align="center">{{ subData.creationDate }}</td>
+          <td align="center">{{ subData.operator }}</td>
+          <td align="center">{{ subData.requester }}</td>
+        </tr>
+      </ng-container>
+    </ng-container>
+  </tbody>
+</table>
